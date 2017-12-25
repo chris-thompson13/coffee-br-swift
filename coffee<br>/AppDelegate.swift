@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import Mapbox
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

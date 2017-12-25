@@ -20,6 +20,13 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MGLMapboxAccessToken</key>
+	<string>pk.eyJ1IjoiY3Rob21wc29uMDExMzk0IiwiYSI6ImNqYW83YjVtdDA0Z2oyd3BoNmQwczVzd2kifQ.a2R2a2Qa7Syn7qw8OTUdiw
+</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Let's see who is near you!</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Let's see who is near you!</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -28,11 +35,11 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
