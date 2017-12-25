@@ -10,6 +10,8 @@ import UIKit
 import Parse
 import Mapbox
 import LinkedInSignIn
+import CoreLocation
+
 
 
 class ViewController: UIViewController {
@@ -18,21 +20,45 @@ class ViewController: UIViewController {
         "linkedInSecret": "uO9W09mpz8PwvLxH",
         "redirectURL": "https://www.example.com/auth/linkedin"
     ]
+    var locationManager = CLLocation()
     
     
     @IBOutlet weak var loginOutlet: UIBarButtonItem!
     
     func checkForExistingAccessToken() {
         if UserDefaults.standard.object(forKey: "LIAccessToken") != nil {
-            loginOutlet.isEnabled = false
             getProfileInfo()
+            if CLLocationManager.locationServicesEnabled() {
+                let mapView = MGLMapView(frame: view.bounds, styleURL: MGLStyle.lightStyleURL())
+                mapView.showsUserLocation = true
+                
+                mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                mapView.setCenter(CLLocationCoordinate2D(latitude: 40.74699, longitude: -63.98742), zoomLevel: 5, animated: true)
+                
+                view.addSubview(mapView)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                    if mapView.userLocation?.coordinate != nil {
+                    mapView.setCenter((mapView.userLocation?.coordinate)!, animated: true)
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                        mapView.setCenter((mapView.userLocation?.coordinate)!, zoomLevel: 16, animated: true)
+                        
+                        
+                    })
+                    }
+                })
+            }
+            
+            
         }
     }
     
     func getProfileInfo() {
         if let accessToken = UserDefaults.standard.object(forKey: "LIAccessToken") {
             // Specify the URL string that we'll get the profile info from.
-            let targetURLString = "https://api.linkedin.com/v1/people/~:(public-profile-url)?format=json"
+            let targetURLString = "https://api.linkedin.com/v1/people/~:(public-profile-url,id,first-name,headline,positions,summary,industry,last-name,maiden-name,email-address,picture-urls::(original))?format=json"
+            
             
             let request = NSMutableURLRequest(url: NSURL(string: targetURLString)! as URL)
             
@@ -55,11 +81,21 @@ class ViewController: UIViewController {
                         let dataDictionary = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? [String:Any]
                         
                         let profileURLString = dataDictionary!["publicProfileUrl"] as AnyObject
+                        let firstName = dataDictionary!["firstName"] as AnyObject
+                        let lastName = dataDictionary!["lastName"] as AnyObject
+                        //let profilePic = dataDictionary!["pictureUrl"] as AnyObject
+
                         UserDefaults.standard.set(profileURLString, forKey: "profileLink")
+                         UserDefaults.standard.set(firstName, forKey: "firstName")
+                         UserDefaults.standard.set(lastName, forKey: "lastName")
+                        //UserDefaults.standard.set(profilePic, forKey: "picUrl")
+
 
                         
                         
-                        print("profile" , dataDictionary!, profileURLString)
+                        print("profile", profileURLString,"firstName", firstName,"lastName",lastName,"picUrl",dataDictionary)
+
+
                     }
                     catch {
                         print("Could not convert JSON data into a dictionary.")
@@ -73,47 +109,43 @@ class ViewController: UIViewController {
 
     
     @IBAction func login(_ sender: Any) {
+        if  UserDefaults.standard.object(forKey: "LIAccessToken") == nil {
+
         let linkedInConfig = LinkedInConfig(linkedInKey: linkedinCredentilas["linkedInKey"]!, linkedInSecret: linkedinCredentilas["linkedInSecret"]!, redirectURL: linkedinCredentilas["redirectURL"]!)
         let linkedInHelper = LinkedinHelper(linkedInConfig: linkedInConfig)
         linkedInHelper.login(from: self,  completion: { (token) in
             UserDefaults.standard.set(token, forKey: "LIAccessToken")
             print(token)
+            self.checkForExistingAccessToken()
+
         }, failure: { (error) in
             print(error.localizedDescription)
         }) {
             print("Cancel")
         }
-        
+        loginOutlet.title = "updateProfile"
+        } else {
+        checkForExistingAccessToken()
+        self.performSegue(withIdentifier: "signedUp", sender: Any?.self)
+
+        }
+    
+    
+    
     }
-    
-    
-    
-    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+
+        
+        if  UserDefaults.standard.object(forKey: "LIAccessToken") != nil {
+            loginOutlet.title = "updateProfile"
+
+        }
         checkForExistingAccessToken()
-        let mapView = MGLMapView(frame: view.bounds, styleURL: MGLStyle.lightStyleURL())
-        mapView.showsUserLocation = true
-        
-        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        mapView.setCenter(CLLocationCoordinate2D(latitude: 40.74699, longitude: -63.98742), zoomLevel: 5, animated: true)
-        
-        view.addSubview(mapView)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-            mapView.setCenter((mapView.userLocation?.coordinate)!, animated: true)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-                mapView.setCenter((mapView.userLocation?.coordinate)!, zoomLevel: 16, animated: true)
-                
-                
-            })
-        })
-        
-        
+
     }
     
     override func didReceiveMemoryWarning() {

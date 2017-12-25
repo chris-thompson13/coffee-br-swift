@@ -24,13 +24,15 @@
 	<string>pk.eyJ1IjoiY3Rob21wc29uMDExMzk0IiwiYSI6ImNqYW83YjVtdDA0Z2oyd3BoNmQwczVzd2kifQ.a2R2a2Qa7Syn7qw8OTUdiw
 </string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Let's see who is near you!</string>
+	<string>Let&apos;s see who is near you!</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Let's see who is near you!</string>
+	<string>Let&apos;s see who is near you!</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Let&apos;s see your pretty face</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
