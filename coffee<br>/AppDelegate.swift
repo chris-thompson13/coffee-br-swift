@@ -23,8 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         let parseConfiguration = ParseClientConfiguration(block: { (ParseMutableClientConfiguration) -> Void in
-            ParseMutableClientConfiguration.applicationId = "b2797e26-64de-417f-81a9-f7c30d09fc6b"
-            ParseMutableClientConfiguration.clientKey = "fIfQyWc6NY1aoQJUqgutmwirnYQ7pEqE"
+            ParseMutableClientConfiguration.applicationId = "21abe39c-d30a-43c0-8028-f41aabe5342c"
+            ParseMutableClientConfiguration.clientKey = "4uASlWwmpZrGr1sQ9GTgSX0qMpGQq1zN"
             ParseMutableClientConfiguration.server = "https://api.parse.buddy.com/parse/"
         })
         

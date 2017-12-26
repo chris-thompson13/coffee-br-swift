@@ -12,26 +12,30 @@ import Parse
 class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var loginOutlet: UIButton!
     @IBAction func loginAction(_ sender: Any) {
+        if PFUser.current() == nil {
         let user = PFUser()
         user.username = UserDefaults.standard.object(forKey: "profileLink") as? String
         user["firstName"] = (UserDefaults.standard.object(forKey: "firstName") as? String)!
         user["lastName"] = (UserDefaults.standard.object(forKey: "lastName") as? String)!
-        user.password = UserDefaults.standard.object(forKey: "LIAccessToken") as? String
+        user["accessToken"] = UserDefaults.standard.object(forKey: "LIAccessToken") as? String
+        user.password = "linkedInAccess"
         
 
         user.signUpInBackground(block: { (success, errorMessage) in
             
             if success == true && errorMessage == nil {
                 self.dismiss(animated: true, completion: nil)
-                let imageData = UIImageJPEGRepresentation(self.imageView.image!, 0.1)
-                let profilePic = PFFile(data: imageData!)
-                profilePic?.saveInBackground(block: { (success, error) in
-                    
-                    
-                })
-            } else {
+                let imageData = UIImagePNGRepresentation(self.imageView.image!)
+                let file = PFFile(name: "img.png", data: imageData!)
                 
-                let errorAlert = UIAlertController(title: "Login Problem", message: errorMessage as! String, preferredStyle: UIAlertControllerStyle.alert)
+                PFUser.current()!["profilePic"] = file
+                PFUser.current()?.saveInBackground()
+                
+            } else {
+
+                
+                
+                let errorAlert = UIAlertController(title: "Login Problem", message: errorMessage as? String, preferredStyle: UIAlertControllerStyle.alert)
                 
                 
                 errorAlert.addAction(UIAlertAction(title: "tryAgain", style: UIAlertActionStyle.default, handler: nil))
@@ -40,7 +44,19 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
             }
         })
         
-        
+        } else {
+            let imageData = UIImagePNGRepresentation(self.imageView.image!)
+            let file = PFFile(name: "img.png", data: imageData!)
+
+            PFUser.current()!["profilePic"] = file
+            PFUser.current()?.saveInBackground(block: { (success, error) in
+                if success == true && error == nil {
+                    self.performSegue(withIdentifier: "loggedIn", sender: Any?.self)
+                }
+            })
+
+
+        }
         
     }
     

@@ -83,17 +83,26 @@ class ViewController: UIViewController {
                         let profileURLString = dataDictionary!["publicProfileUrl"] as AnyObject
                         let firstName = dataDictionary!["firstName"] as AnyObject
                         let lastName = dataDictionary!["lastName"] as AnyObject
+                        let headline = dataDictionary!["headline"] as AnyObject
+
                         //let profilePic = dataDictionary!["pictureUrl"] as AnyObject
 
                         UserDefaults.standard.set(profileURLString, forKey: "profileLink")
+                        
                          UserDefaults.standard.set(firstName, forKey: "firstName")
                          UserDefaults.standard.set(lastName, forKey: "lastName")
+                        
+                        if headline as! String != "" {
+                            UserDefaults.standard.set(headline, forKey: "headline")
+                        }
+
+                        
                         //UserDefaults.standard.set(profilePic, forKey: "picUrl")
 
 
                         
                         
-                        print("profile", profileURLString,"firstName", firstName,"lastName",lastName,"picUrl",dataDictionary)
+                        print("profile", profileURLString,"firstName", firstName,"lastName",lastName,"picUrl", dataDictionary)
 
 
                     }
@@ -145,6 +154,10 @@ class ViewController: UIViewController {
 
         }
         checkForExistingAccessToken()
+        
+        if PFUser.current() != nil {
+            print("currentUser",PFUser.current()!)
+        }
 
     }
     
