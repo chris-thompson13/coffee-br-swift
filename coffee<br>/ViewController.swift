@@ -134,18 +134,13 @@ class ViewController: UIViewController {
             }
             loginOutlet.title = "updateProfile"
         } else {
-            if PFUser.current() != nil {
-                checkForExistingAccessToken()
-                self.performSegue(withIdentifier: "signedUp", sender: Any?.self)
-            } else {
-                PFUser.logInWithUsername(inBackground: (UserDefaults.standard.object(forKey: "profileLink") as? String)!, password: "linkedInAccess", block: { (User, error) in
-                    if User != nil && error == nil {
-                        self.performSegue(withIdentifier: "signedUp", sender: Any?.self)
-                        
-                    }
+            PFUser.logInWithUsername(inBackground: (UserDefaults.standard.object(forKey: "profileLink") as? String)!, password: "linkedInAccess", block: { (User, error) in
+                if User != nil && error == nil {
+                    print("signing in")
+                    self.performSegue(withIdentifier: "signedUp", sender: Any?.self)
                     
-                })
-            }
+                }
+            })
         }
         
         
