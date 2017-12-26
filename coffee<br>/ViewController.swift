@@ -39,13 +39,13 @@ class ViewController: UIViewController {
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
                     if mapView.userLocation?.coordinate != nil {
-                    mapView.setCenter((mapView.userLocation?.coordinate)!, animated: true)
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-                        mapView.setCenter((mapView.userLocation?.coordinate)!, zoomLevel: 16, animated: true)
+                        mapView.setCenter((mapView.userLocation?.coordinate)!, animated: true)
                         
-                        
-                    })
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                            mapView.setCenter((mapView.userLocation?.coordinate)!, zoomLevel: 16, animated: true)
+                            
+                            
+                        })
                     }
                 })
             }
@@ -84,81 +84,90 @@ class ViewController: UIViewController {
                         let firstName = dataDictionary!["firstName"] as AnyObject
                         let lastName = dataDictionary!["lastName"] as AnyObject
                         let headline = dataDictionary!["headline"] as AnyObject
-
+                        
                         //let profilePic = dataDictionary!["pictureUrl"] as AnyObject
-
+                        
                         UserDefaults.standard.set(profileURLString, forKey: "profileLink")
                         
-                         UserDefaults.standard.set(firstName, forKey: "firstName")
-                         UserDefaults.standard.set(lastName, forKey: "lastName")
+                        UserDefaults.standard.set(firstName, forKey: "firstName")
+                        UserDefaults.standard.set(lastName, forKey: "lastName")
                         
                         if headline as! String != "" {
                             UserDefaults.standard.set(headline, forKey: "headline")
                         }
-
+                        
                         
                         //UserDefaults.standard.set(profilePic, forKey: "picUrl")
-
-
+                        
+                        
                         
                         
                         print("profile", profileURLString,"firstName", firstName,"lastName",lastName,"picUrl", dataDictionary)
-
-
+                        
+                        
                     }
                     catch {
                         print("Could not convert JSON data into a dictionary.")
                     }
                 }
                 
-        }
+            }
             task.resume()
         }
     }
-
+    
     
     @IBAction func login(_ sender: Any) {
         if  UserDefaults.standard.object(forKey: "LIAccessToken") == nil {
-
-        let linkedInConfig = LinkedInConfig(linkedInKey: linkedinCredentilas["linkedInKey"]!, linkedInSecret: linkedinCredentilas["linkedInSecret"]!, redirectURL: linkedinCredentilas["redirectURL"]!)
-        let linkedInHelper = LinkedinHelper(linkedInConfig: linkedInConfig)
-        linkedInHelper.login(from: self,  completion: { (token) in
-            UserDefaults.standard.set(token, forKey: "LIAccessToken")
-            print(token)
-            self.checkForExistingAccessToken()
-
-        }, failure: { (error) in
-            print(error.localizedDescription)
-        }) {
-            print("Cancel")
-        }
-        loginOutlet.title = "updateProfile"
+            
+            let linkedInConfig = LinkedInConfig(linkedInKey: linkedinCredentilas["linkedInKey"]!, linkedInSecret: linkedinCredentilas["linkedInSecret"]!, redirectURL: linkedinCredentilas["redirectURL"]!)
+            let linkedInHelper = LinkedinHelper(linkedInConfig: linkedInConfig)
+            linkedInHelper.login(from: self,  completion: { (token) in
+                UserDefaults.standard.set(token, forKey: "LIAccessToken")
+                print(token)
+                self.checkForExistingAccessToken()
+                
+            }, failure: { (error) in
+                print(error.localizedDescription)
+            }) {
+                print("Cancel")
+            }
+            loginOutlet.title = "updateProfile"
         } else {
-        checkForExistingAccessToken()
-        self.performSegue(withIdentifier: "signedUp", sender: Any?.self)
-
+            if PFUser.current() != nil {
+                checkForExistingAccessToken()
+                self.performSegue(withIdentifier: "signedUp", sender: Any?.self)
+            } else {
+                PFUser.logInWithUsername(inBackground: (UserDefaults.standard.object(forKey: "profileLink") as? String)!, password: "linkedInAccess", block: { (User, error) in
+                    if User != nil && error == nil {
+                        self.performSegue(withIdentifier: "signedUp", sender: Any?.self)
+                        
+                    }
+                    
+                })
+            }
         }
-    
-    
-    
+        
+        
+        
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
+        
         
         if  UserDefaults.standard.object(forKey: "LIAccessToken") != nil {
             loginOutlet.title = "updateProfile"
-
+            
         }
         checkForExistingAccessToken()
         
         if PFUser.current() != nil {
             print("currentUser",PFUser.current()!)
         }
-
+        
     }
     
     override func didReceiveMemoryWarning() {

@@ -135,7 +135,9 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVQ-BT-ZE0">
                                 <rect key="frame" x="68" y="362.5" width="239" height="30"/>
-                                <state key="normal" title="View on Linked In"/>
+                                <state key="normal" title="View on Linked In">
+                                    <color key="titleColor" red="0.10815858070000001" green="0.76877294429999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="viewProfile:" destination="vg1-sk-xNG" eventType="touchUpInside" id="Tmc-Jz-VnY"/>
                                     <segue destination="OjV-c8-1sa" kind="show" id="Eps-Wh-4El"/>
@@ -147,15 +149,30 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nwl-gU-qKf">
+                                <rect key="frame" x="68" y="563" width="239" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="3VV-4x-ud1"/>
+                                </constraints>
+                                <state key="normal" title="Log Out">
+                                    <color key="titleColor" red="0.10815858070000001" green="0.76877294429999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="logOut:" destination="vg1-sk-xNG" eventType="touchUpInside" id="26I-49-YQu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="d9i-bF-mKn" firstAttribute="top" secondItem="2ra-is-ymA" secondAttribute="top" constant="20" id="1Dc-Lw-f6B"/>
                             <constraint firstItem="fah-7h-Jrl" firstAttribute="top" secondItem="EVQ-BT-ZE0" secondAttribute="bottom" constant="7.5" id="C1C-Nj-fK3"/>
+                            <constraint firstItem="2ra-is-ymA" firstAttribute="bottom" secondItem="Nwl-gU-qKf" secondAttribute="bottom" constant="25" id="QgQ-zl-GE1"/>
                             <constraint firstItem="EVQ-BT-ZE0" firstAttribute="leading" secondItem="2ra-is-ymA" secondAttribute="leading" constant="68" id="RHo-DE-HE9"/>
                             <constraint firstItem="2ra-is-ymA" firstAttribute="trailing" secondItem="EVQ-BT-ZE0" secondAttribute="trailing" constant="68" id="S23-Pf-bkk"/>
+                            <constraint firstItem="2ra-is-ymA" firstAttribute="trailing" secondItem="Nwl-gU-qKf" secondAttribute="trailing" constant="68" id="YcX-Or-D8j"/>
                             <constraint firstItem="EVQ-BT-ZE0" firstAttribute="top" secondItem="w8e-qf-wvF" secondAttribute="bottom" constant="8" id="bk2-tf-LdQ"/>
                             <constraint firstItem="2ra-is-ymA" firstAttribute="trailing" secondItem="d9i-bF-mKn" secondAttribute="trailing" constant="68" id="io8-JU-hxb"/>
+                            <constraint firstItem="Nwl-gU-qKf" firstAttribute="leading" secondItem="2ra-is-ymA" secondAttribute="leading" constant="68" id="jZv-pX-sw6"/>
                             <constraint firstItem="w8e-qf-wvF" firstAttribute="top" secondItem="d9i-bF-mKn" secondAttribute="bottom" constant="44" id="p2C-nU-5v2"/>
                             <constraint firstItem="fah-7h-Jrl" firstAttribute="leading" secondItem="2ra-is-ymA" secondAttribute="leading" constant="68" id="pc1-8J-RhE"/>
                             <constraint firstItem="w8e-qf-wvF" firstAttribute="leading" secondItem="2ra-is-ymA" secondAttribute="leading" constant="68" id="qZ2-rv-L2e"/>
@@ -172,11 +189,12 @@
                         <outlet property="label" destination="fah-7h-Jrl" id="Tee-sR-bOV"/>
                         <outlet property="name" destination="w8e-qf-wvF" id="690-Gu-vxs"/>
                         <outlet property="profilePic" destination="d9i-bF-mKn" id="bqy-Tu-Y5c"/>
+                        <segue destination="g0B-0f-9AS" kind="showDetail" identifier="logOut" id="kVp-56-rF9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Ri-mD-nP3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1476" y="-269.41529235382313"/>
+            <point key="canvasLocation" x="1340" y="-222"/>
         </scene>
         <!--LinkedIn Profile-->
         <scene sceneID="686-3P-oXF">
@@ -374,6 +392,8 @@
         <image name="camera" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Eps-Wh-4El"/>
+        <segue reference="kVp-56-rF9"/>
         <segue reference="usc-lI-JSf"/>
         <segue reference="Dgd-uw-c2K"/>
         <segue reference="s0P-q8-INO"/>

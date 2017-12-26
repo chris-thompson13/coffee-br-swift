@@ -16,6 +16,15 @@ class ProfileViewController: UIViewController {
     }
     @IBOutlet weak var label: UILabel!
     
+    @IBAction func logOut(_ sender: Any) {
+        if PFUser.current() != nil {
+            PFUser.logOutInBackground(block: { (error) in
+                if error == nil {
+                    self.performSegue(withIdentifier: "logOut", sender: Any?.self)
+                }
+            })
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         let imageData = PFUser.current()!["profilePic"] as! PFFile
@@ -35,24 +44,24 @@ class ProfileViewController: UIViewController {
             PFUser.current()!["headline"] = UserDefaults.standard.object(forKey: "profileLink") as? String
             PFUser.current()?.saveInBackground()
         }
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
