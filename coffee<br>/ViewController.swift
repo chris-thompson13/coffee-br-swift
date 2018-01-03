@@ -11,6 +11,8 @@ import Parse
 import Mapbox
 import LinkedInSignIn
 import CoreLocation
+import NVActivityIndicatorView
+
 
 
 
@@ -22,8 +24,12 @@ class ViewController: UIViewController {
     ]
     var locationManager = CLLocation()
     
+    @IBOutlet weak var activity: NVActivityIndicatorView!
     
     @IBOutlet weak var loginOutlet: UIBarButtonItem!
+    
+
+    
     
     func checkForExistingAccessToken() {
         if UserDefaults.standard.object(forKey: "LIAccessToken") != nil {
@@ -118,6 +124,8 @@ class ViewController: UIViewController {
     
     
     @IBAction func login(_ sender: Any) {
+        activity.startAnimating()
+
         
         if PFUser.current() != nil {
             print("currentUser",PFUser.current()!)
@@ -153,7 +161,8 @@ class ViewController: UIViewController {
         }
         
         
-        
+        activity.stopAnimating()
+
     }
     
     

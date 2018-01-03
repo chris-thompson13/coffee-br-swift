@@ -57,14 +57,14 @@ class MeetViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.meetings = objects!
                 self.activity.stopAnimating()
                 
-                pCell.name.text = objects![indexPath.row]["healdline"] as? String
+                pCell.name.text =  objects![indexPath.row]["headline"] as? String
                 pCell.topic.text = "hello"
                 
                 pCell.currentLink = (objects![indexPath.row]["link"] as? String)!
                 
                 //pCell.location.text = String(self.point.distanceInMiles(to: (objects![indexPath.row]["location"] as! PFGeoPoint))) + " miles away"
                 
-                pCell.location.text = String(Double(round(10000 * (self.point.distanceInMiles(to: (objects![indexPath.row]["location"] as! PFGeoPoint))))/0)) + " miles away"
+                pCell.location.text = "about " + String((Double(round(10000 * (self.point.distanceInMiles(to: (objects![indexPath.row]["location"] as! PFGeoPoint))))))/1) + " miles away"
                 pCell.topic.text = objects![indexPath.row]["description"] as? String
                 if objects![indexPath.row]["profilePic"] != nil {
                 (objects![indexPath.row]["profilePic"] as! PFFile).getDataInBackground(block: { (data, error) in
@@ -105,8 +105,6 @@ class MeetViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
         
-
-        table.reloadData()
         
         webView.isHidden = false
         back.isHidden = false
@@ -153,10 +151,15 @@ class MeetViewController: UIViewController, UITableViewDelegate, UITableViewData
             meetUp.saveInBackground(block: { (success, error) in
                 if success == true && error == nil {
                     self.activity.stopAnimating()
+                    self.table.reloadData()
+                    self.fetch()
+                    self.text.text = ""
 
                     
                 } else {
                     self.activity.stopAnimating()
+                    self.fetch()
+                    self.table.reloadData()
 
                 }
             })
@@ -217,8 +220,16 @@ class MeetViewController: UIViewController, UITableViewDelegate, UITableViewData
         refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
         self.refreshControl.attributedTitle = NSAttributedString(string: "loading...", attributes: [NSAttributedStringKey.foregroundColor: UIColor(red: 255.0/255.0, green: 182.0/255.0, blue: 8.0/255.0, alpha: 1.0)])
 
-
+        var timer = Timer()
         
+        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.timerAction), userInfo: nil, repeats: false)
+
+    }
+    
+
+    
+    @objc func timerAction() {
+        fetch()
     }
     
     // number of rows in table view
