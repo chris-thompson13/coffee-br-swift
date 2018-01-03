@@ -18,18 +18,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="76D-FX-7Zo">
-                                <rect key="frame" x="124" y="159" width="126" height="126"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="126" id="U2O-EO-WB3"/>
-                                    <constraint firstAttribute="width" constant="126" id="k8G-Lg-t5S"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="126" id="yke-zc-fmW"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="newLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="76D-FX-7Zo">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="345"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="coffee&lt;br&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5X4-2Y-afC">
-                                <rect key="frame" x="0.0" y="323" width="375" height="77"/>
-                                <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="48"/>
+                                <rect key="frame" x="0.0" y="348.5" width="375" height="51.5"/>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="43"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -49,12 +45,9 @@
                         <constraints>
                             <constraint firstItem="5X4-2Y-afC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0OH-sX-GbK"/>
                             <constraint firstItem="5X4-2Y-afC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="VLv-QQ-whn"/>
-                            <constraint firstItem="76D-FX-7Zo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="bU6-Ii-lNT"/>
                             <constraint firstItem="zWY-bo-0Mv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="eTV-He-yhL"/>
-                            <constraint firstItem="5X4-2Y-afC" firstAttribute="top" secondItem="76D-FX-7Zo" secondAttribute="bottom" constant="38" id="gEt-wf-JNk"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="5X4-2Y-afC" secondAttribute="bottom" constant="267" id="jSd-gU-tqb"/>
                             <constraint firstItem="zWY-bo-0Mv" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="lMZ-v4-4bP"/>
-                            <constraint firstItem="76D-FX-7Zo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="139" id="mpS-EY-n5z"/>
                             <constraint firstItem="zWY-bo-0Mv" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="s93-1J-ws4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -66,6 +59,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo.png" width="167" height="167"/>
+        <image name="newLogo.png" width="1024" height="1024"/>
     </resources>
 </document>

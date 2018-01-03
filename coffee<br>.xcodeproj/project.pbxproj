@@ -24,6 +24,7 @@
 		66C76B2D1FFC13C5002850D6 /* CellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C76B2C1FFC13C5002850D6 /* CellViewController.swift */; };
 		66C76B311FFC1DC3002850D6 /* MeetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C76B301FFC1DC3002850D6 /* MeetTableViewCell.swift */; };
 		66C76B331FFCDD87002850D6 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 66C76B321FFCDD87002850D6 /* logo.png */; };
+		66C76B351FFD38B1002850D6 /* newLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 66C76B341FFD38B0002850D6 /* newLogo.png */; };
 		816109C61A7A1FB37BF134D5 /* Pods_coffee_br_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 234BE7E24E5EB4485EEFFEE4 /* Pods_coffee_br_.framework */; };
 		9B9290C7C50F5A9BC647FA0E /* Pods_coffee_br_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 560E405DE0EE2B1775596914 /* Pods_coffee_br_Tests.framework */; };
 		A4D15A06AB5F249292011117 /* Pods_coffee_br_UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA07F465A843472D6CEEE85 /* Pods_coffee_br_UITests.framework */; };
@@ -75,6 +76,7 @@
 		66C76B2C1FFC13C5002850D6 /* CellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewController.swift; sourceTree = "<group>"; };
 		66C76B301FFC1DC3002850D6 /* MeetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetTableViewCell.swift; sourceTree = "<group>"; };
 		66C76B321FFCDD87002850D6 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = ../../../networkOndemand/networkOndemand/Assets.xcassets/AppIcon.appiconset/logo.png; sourceTree = "<group>"; };
+		66C76B341FFD38B0002850D6 /* newLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = newLogo.png; path = "../../../../Downloads/appiconmaker.co_ios (1)/newLogo.png"; sourceTree = "<group>"; };
 		96032CC3D5B8103C75382448 /* Pods-coffee<br>Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-coffee<br>Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-coffee<br>Tests/Pods-coffee<br>Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		B1A451BEC7525318049A0049 /* Pods-coffee<br>UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-coffee<br>UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-coffee<br>UITests/Pods-coffee<br>UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C7C6E452E1FA23F91DD17861 /* Pods-coffee<br>.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-coffee<br>.debug.xcconfig"; path = "Pods/Target Support Files/Pods-coffee<br>/Pods-coffee<br>.debug.xcconfig"; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				6663A09B1FF05BD100F67D36 /* Main.storyboard */,
 				6663A09D1FF0633D00F67D36 /* Assets.xcassets */,
 				66C76B321FFCDD87002850D6 /* logo.png */,
+				66C76B341FFD38B0002850D6 /* newLogo.png */,
 				6663A0761FF0564B00F67D36 /* LaunchScreen.storyboard */,
 				6663A0791FF0564B00F67D36 /* Info.plist */,
 				6663A0711FF0564B00F67D36 /* coffee_br_.xcdatamodeld */,
@@ -313,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6663A0781FF0564B00F67D36 /* LaunchScreen.storyboard in Resources */,
+				66C76B351FFD38B1002850D6 /* newLogo.png in Resources */,
 				6663A09E1FF0633D00F67D36 /* Assets.xcassets in Resources */,
 				6663A09C1FF05BD100F67D36 /* Main.storyboard in Resources */,
 				66C76B331FFCDD87002850D6 /* logo.png in Resources */,
