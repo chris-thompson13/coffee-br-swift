@@ -48,7 +48,7 @@ class MeetViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         var query = PFQuery(className:"meeting")
         query.whereKey("location", nearGeoPoint:location1)
-        query.whereKey("location", nearGeoPoint: point, withinMiles: 5)
+        query.whereKey("location", nearGeoPoint: point, withinMiles: 10)
 
         query.order(byDescending: "createdAt")
         query.findObjectsInBackground { (objects, error) in
@@ -217,8 +217,8 @@ class MeetViewController: UIViewController, UITableViewDelegate, UITableViewData
             table.addSubview(refreshControl)
         }
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
-        self.refreshControl.attributedTitle = NSAttributedString(string: "loading...", attributes: [NSAttributedStringKey.foregroundColor: UIColor(red: 255.0/255.0, green: 182.0/255.0, blue: 8.0/255.0, alpha: 1.0)])
+        refreshControl.tintColor = UIColor.white
+        self.refreshControl.attributedTitle = NSAttributedString(string: "loading...", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
 
         var timer = Timer()
         

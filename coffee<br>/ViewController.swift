@@ -14,9 +14,14 @@ import CoreLocation
 import NVActivityIndicatorView
 
 
+extension PFGeoPoint {
+    
+    func location() -> CLLocation {
+        return CLLocation(latitude: self.latitude, longitude: self.longitude)
+    }
+}
 
-
-class ViewController: UIViewController {
+class ViewController: UIViewController, MGLMapViewDelegate {
     let linkedinCredentilas = [
         "linkedInKey": "86fmghpz7abq5w",
         "linkedInSecret": "uO9W09mpz8PwvLxH",
@@ -28,27 +33,66 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var loginOutlet: UIBarButtonItem!
     
-
+    var point = PFGeoPoint()
+    var mapView = MGLMapView()
     
     
     func checkForExistingAccessToken() {
         if UserDefaults.standard.object(forKey: "LIAccessToken") != nil {
             getProfileInfo()
             if CLLocationManager.locationServicesEnabled() {
-                let mapView = MGLMapView(frame: view.bounds, styleURL: MGLStyle.lightStyleURL())
+                mapView = MGLMapView(frame: view.bounds, styleURL: MGLStyle.lightStyleURL())
                 mapView.showsUserLocation = true
                 
                 mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                 mapView.setCenter(CLLocationCoordinate2D(latitude: 40.74699, longitude: -63.98742), zoomLevel: 5, animated: true)
                 
                 view.addSubview(mapView)
+
+                mapView.delegate = self
+
+
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-                    if mapView.userLocation?.coordinate != nil {
-                        mapView.setCenter((mapView.userLocation?.coordinate)!, animated: true)
+                    if self.mapView.userLocation?.coordinate != nil {
+                        self.mapView.setCenter((self.mapView.userLocation?.coordinate)!, animated: true)
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-                            mapView.setCenter((mapView.userLocation?.coordinate)!, zoomLevel: 16, animated: true)
+                            self.mapView.setCenter((self.mapView.userLocation?.coordinate)!, zoomLevel: 10, animated: true)
+                            
+                            let query = PFQuery(className:"meeting")
+
+                            
+                            query.order(byDescending: "createdAt")
+                            query.findObjectsInBackground(block: { (objects, error) in
+                                if error == nil {
+                                    print("loadingPins")
+                                    print(objects!)
+                                    for object in objects! {
+
+                                        let annotation = MGLPointAnnotation()
+                                        annotation.coordinate = CLLocationCoordinate2D(latitude: (object["location"] as! PFGeoPoint).latitude, longitude: (object["location"] as! PFGeoPoint).longitude)
+                                        
+                                            print("loadingPins", ((object["location"] as! PFGeoPoint).latitude), (longitude: (object["location"] as! PFGeoPoint).longitude))
+                                        
+                                        annotation.title = object["description"] as? String
+                                        annotation.subtitle = object["healdline"] as? String
+                                        self.mapView.addAnnotation(annotation)
+                                        self.mapView.delegate = self
+
+                                        // pop-up the callout view
+
+
+                                    }
+                                } else {
+                                    print("error")
+                                    print(error!)
+                                }
+
+                            })
+                            
+
+                            
                             
                             
                         })
@@ -58,8 +102,12 @@ class ViewController: UIViewController {
             
             
         }
+
     }
     
+    func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
+        return true
+    }
     func getProfileInfo() {
         if let accessToken = UserDefaults.standard.object(forKey: "LIAccessToken") {
             // Specify the URL string that we'll get the profile info from.
@@ -147,7 +195,8 @@ class ViewController: UIViewController {
             }) {
                 print("Cancel")
             }
-            loginOutlet.title = "updateProfile"
+            loginOutlet.title = "view profile"
+            
         } else {
             PFUser.logInWithUsername(inBackground: (UserDefaults.standard.object(forKey: "profileLink") as? String)!, password: "linkedInAccess", block: { (User, error) in
                 if User != nil && error == nil {
@@ -165,18 +214,30 @@ class ViewController: UIViewController {
 
     }
     
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation] ) {
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        point = PFGeoPoint(latitude: locValue.latitude, longitude: locValue.longitude)
+        return
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        self.mapView.delegate = self
+
         
         if  UserDefaults.standard.object(forKey: "LIAccessToken") != nil {
-            loginOutlet.title = "updateProfile"
+            loginOutlet.title = "View Profile"
             
         }
         checkForExistingAccessToken()
         
+
+        
+        
+
 
         
     }

@@ -315,13 +315,13 @@
                     </tabBar>
                     <connections>
                         <segue destination="vg1-sk-xNG" kind="relationship" relationship="viewControllers" id="kV6-XI-GZS"/>
-                        <segue destination="8I5-go-qax" kind="relationship" relationship="viewControllers" id="Dgd-uw-c2K"/>
                         <segue destination="28Y-B6-lrn" kind="relationship" relationship="viewControllers" id="K2g-wv-Ocs"/>
+                        <segue destination="g0B-0f-9AS" kind="relationship" relationship="viewControllers" id="Pak-fU-g9I"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oWk-jK-fTc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1439" y="651"/>
+            <point key="canvasLocation" x="1455" y="775"/>
         </scene>
         <!--Meet Someone-->
         <scene sceneID="q4t-JH-o6d">
@@ -332,10 +332,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name a topic and meet someone!" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1iI-fT-VAU">
-                                <rect key="frame" x="0.0" y="601" width="375" height="17"/>
+                                <rect key="frame" x="0.0" y="590" width="375" height="28"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.0" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholder">
@@ -358,7 +358,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cZj-Of-T5H">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="593"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="582"/>
                                 <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -598,7 +598,7 @@
             </objects>
             <point key="canvasLocation" x="1143" y="1872"/>
         </scene>
-        <!--Item 1-->
+        <!--Main View Controller-->
         <scene sceneID="OkH-mu-yTq">
             <objects>
                 <viewController id="YQc-oH-201" customClass="MainViewController" customModule="coffee_br_" customModuleProvider="target" sceneMemberID="viewController">
@@ -621,7 +621,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zaS-al-YGV"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="4yu-nY-pGr"/>
+                    <tabBarItem key="tabBarItem" title="" id="4yu-nY-pGr"/>
                     <connections>
                         <segue destination="g0B-0f-9AS" kind="show" identifier="goLogin" id="iVs-mx-4R6"/>
                     </connections>
@@ -677,10 +677,11 @@
             </objects>
             <point key="canvasLocation" x="20" y="-269"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Map-->
         <scene sceneID="CXB-nH-FEj">
             <objects>
                 <navigationController modalTransitionStyle="partialCurl" id="g0B-0f-9AS" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" image="default_marker.png" id="Ho1-hP-pSD"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="8Qc-TH-sBO">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -711,14 +712,14 @@
     <resources>
         <image name="User" width="25" height="25"/>
         <image name="camera" width="25" height="25"/>
+        <image name="default_marker.png" width="21" height="38"/>
         <image name="logo.png" width="167" height="167"/>
         <image name="meet" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="kVp-56-rF9"/>
         <segue reference="vJa-6L-UTe"/>
-        <segue reference="K0t-1u-IEU"/>
-        <segue reference="MFw-9e-fjk"/>
+        <segue reference="usc-lI-JSf"/>
         <segue reference="s0P-q8-INO"/>
     </inferredMetricsTieBreakers>
 </document>
