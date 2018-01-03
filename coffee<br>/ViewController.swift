@@ -130,7 +130,7 @@ class ViewController: UIViewController {
         if PFUser.current() != nil {
             print("currentUser",PFUser.current()!)
             if PFUser.current()!["profilePic"] != nil {
-                self.performSegue(withIdentifier: "logger", sender: Any?.self)
+                self.performSegue(withIdentifier: "goHome", sender: Any?.self)
             }
         }
         if  UserDefaults.standard.object(forKey: "LIAccessToken") == nil {
