@@ -57,7 +57,7 @@ class MeetViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.meetings = objects!
                 self.activity.stopAnimating()
                 
-                pCell.name.text =  objects![indexPath.row]["headline"] as? String
+                pCell.name.text =  objects![indexPath.row]["healdline"] as? String
                 pCell.topic.text = "hello"
                 
                 pCell.currentLink = (objects![indexPath.row]["link"] as? String)!
