@@ -8,10 +8,17 @@
 
 import UIKit
 import Parse
+import NVActivityIndicatorView
+
 
 class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var loginOutlet: UIButton!
+    @IBOutlet weak var activityIndicator: NVActivityIndicatorView!
+    
+    @IBOutlet weak var picOutlet: UIButton!
     @IBAction func loginAction(_ sender: Any) {
+        setHidden()
+        activityIndicator.startAnimating()
         if PFUser.current() == nil {
             let user = PFUser()
             user.username = UserDefaults.standard.object(forKey: "profileLink") as? String
@@ -30,6 +37,10 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
                     
                     PFUser.current()!["profilePic"] = file
                     PFUser.current()?.saveInBackground()
+                    self.performSegue(withIdentifier: "loggedIn", sender: Any?.self)
+                    self.activityIndicator.stopAnimating()
+
+
                     
                 } else {
                     
@@ -40,6 +51,8 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
                     
                     errorAlert.addAction(UIAlertAction(title: "tryAgain", style: UIAlertActionStyle.default, handler: nil))
                     self.present(errorAlert, animated: true, completion: nil)
+                    self.activityIndicator.stopAnimating()
+
                     
                 }
             })
@@ -52,11 +65,29 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
             PFUser.current()?.saveInBackground(block: { (success, error) in
                 if success == true && error == nil {
                     self.performSegue(withIdentifier: "loggedIn", sender: Any?.self)
+                    self.activityIndicator.stopAnimating()
+
+                } else {
+                    self.activityIndicator.stopAnimating()
+                    let alert = UIAlertController(title: "Alert", message: error as? String, preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    
+                    
                 }
             })
             
             
         }
+        
+    }
+    func setHidden(){
+        loginOutlet.isHidden = true
+        picOutlet.isHidden = true
+        imageView.isHidden = true
+        titleOutlet.isHidden = true
+
+
         
     }
     
@@ -89,9 +120,11 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
-        imageView.layer.cornerRadius = 100.0
-        imageView.clipsToBounds = true
         
+        imageView.layer.cornerRadius = imageView.bounds.height/5
+        imageView.clipsToBounds = true
+        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.layer.borderWidth = 5
         
         
         

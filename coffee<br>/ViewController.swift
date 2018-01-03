@@ -118,6 +118,13 @@ class ViewController: UIViewController {
     
     
     @IBAction func login(_ sender: Any) {
+        
+        if PFUser.current() != nil {
+            print("currentUser",PFUser.current()!)
+            if PFUser.current()!["profilePic"] != nil {
+                self.performSegue(withIdentifier: "logger", sender: Any?.self)
+            }
+        }
         if  UserDefaults.standard.object(forKey: "LIAccessToken") == nil {
             
             let linkedInConfig = LinkedInConfig(linkedInKey: linkedinCredentilas["linkedInKey"]!, linkedInSecret: linkedinCredentilas["linkedInSecret"]!, redirectURL: linkedinCredentilas["redirectURL"]!)
@@ -139,6 +146,8 @@ class ViewController: UIViewController {
                     print("signing in")
                     self.performSegue(withIdentifier: "signedUp", sender: Any?.self)
                     
+                } else {
+                    self.performSegue(withIdentifier: "signedUp", sender: Any?.self)
                 }
             })
         }
@@ -159,9 +168,7 @@ class ViewController: UIViewController {
         }
         checkForExistingAccessToken()
         
-        if PFUser.current() != nil {
-            print("currentUser",PFUser.current()!)
-        }
+
         
     }
     

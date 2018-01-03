@@ -11,6 +11,10 @@ target 'coffee<br>' do
   pod 'Mapbox-iOS-SDK'
   pod 'GoogleMaps'
   pod 'LinkedInSignIn'
+  pod 'NVActivityIndicatorView'
+  pod 'GooglePlaces'
+  pod 'GooglePlacePicker'
+  pod 'GoogleMaps'
 
   target 'coffee<br>Tests' do
     inherit! :search_paths

@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController {
     @IBAction func viewProfile(_ sender: Any) {
     }
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var buttonOutlet: UIButton!
     
     @IBAction func logOut(_ sender: Any) {
         if PFUser.current() != nil {
@@ -36,8 +37,15 @@ class ProfileViewController: UIViewController {
             }
         }
         name.text = PFUser.current()?["firstName"] as? String
-        profilePic.layer.cornerRadius = 100.0
+        profilePic.layer.cornerRadius = profilePic.bounds.height/5
         profilePic.clipsToBounds = true
+        profilePic.layer.borderColor = UIColor.white.cgColor
+        profilePic.layer.borderWidth = 5
+        label.layer.cornerRadius = 15
+        label.clipsToBounds = true
+        buttonOutlet.layer.cornerRadius = 15
+        buttonOutlet.clipsToBounds = true
+
         
         if UserDefaults.standard.object(forKey: "headline") as? String != nil {
             label.text = UserDefaults.standard.object(forKey: "headline") as? String

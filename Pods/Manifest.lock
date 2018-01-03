@@ -5,27 +5,41 @@ PODS:
   - GoogleMaps/Base (2.5.0)
   - GoogleMaps/Maps (2.5.0):
     - GoogleMaps/Base
+  - GooglePlacePicker (2.5.0):
+    - GoogleMaps (= 2.5.0)
+    - GooglePlaces (= 2.5.0)
+  - GooglePlaces (2.5.0):
+    - GoogleMaps/Base (= 2.5.0)
   - LinkedInSignIn (0.0.13):
     - MBProgressHUD (~> 0.9)
   - Mapbox-iOS-SDK (3.7.2)
   - MBProgressHUD (0.9.2)
+  - NVActivityIndicatorView (4.1.1):
+    - NVActivityIndicatorView/Presenter (= 4.1.1)
+  - NVActivityIndicatorView/Presenter (4.1.1)
   - Parse (1.15.3):
     - Bolts/Tasks (~> 1.8)
 
 DEPENDENCIES:
   - GoogleMaps
+  - GooglePlacePicker
+  - GooglePlaces
   - LinkedInSignIn
   - Mapbox-iOS-SDK
+  - NVActivityIndicatorView
   - Parse
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   GoogleMaps: c087b8e5dfe87ca6ebf59adb9b4894a4146bec4f
+  GooglePlacePicker: 1573e644ab54564d95c2643edc0f29091609e966
+  GooglePlaces: dd70d9d71ea1c7944846afe67de3712c99b30a77
   LinkedInSignIn: 552481e74e5d20f584071396ebeb513af5474b55
   Mapbox-iOS-SDK: d882f53debc26649b728755df5b7a160d9086367
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  NVActivityIndicatorView: 60109b9bf46efc2e71ab81453196ccdfdfeea870
   Parse: cdc0f1f975ee8be0409e66f21b05df4ae067047c
 
-PODFILE CHECKSUM: 4b074581cfb2d87894ba2e0d364ba46bf89d8a7a
+PODFILE CHECKSUM: e03fefd788853c8599b15b1993e37470a7a91c77
 
 COCOAPODS: 1.3.1

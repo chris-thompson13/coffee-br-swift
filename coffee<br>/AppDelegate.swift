@@ -10,6 +10,9 @@ import UIKit
 import CoreData
 import Mapbox
 import Parse
+import GooglePlaces
+import GooglePlacePicker
+
 
 
 @UIApplicationMain
@@ -29,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
         Parse.initialize(with: parseConfiguration)
+        
+
+        GMSPlacesClient.provideAPIKey("AIzaSyDBgmhB0bz7H5jl2P68YTkWsqG0h4_20UI")
 
         return true
     }
